@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 require_once 'db.php';
 
@@ -6,27 +7,16 @@ require_once 'db.php';
 function auth_check($username,$password)
 {
 	$conn = getConnection();
-	$query = "SELECT * from users,dept where uname='{$username}' AND password='{$password}' AND users.dept_no=dept.dept_no";
+	$query = "SELECT * from users,dept where uname='{$username}' AND pass='{$password}' AND users.dept_no=dept.dept_no";
 	$data = mysqli_query($conn,$query);
-	$row= mysqli_fetch_assoc($data);
-	
-	if ($row['uname']==$username AND $row['password']==$password) {
-		$_SESSION['ID'] = $row['id'];
-		$_SESSION['name'] = $row['uname'];
-		$_SESSION['type']=$row['dept.dept_name'];
-		return TRUE;
-	}
-	else
-	{
-		return FALSE;
-	}
+	return $data;
 }
 
 
 function emp_details()
 {
 	$conn = getConnection();
-	$query = "SELECT * from users";
+	$query = "SELECT * from users WHERE dept_no=2";
 	$data = mysqli_query($conn,$query);
 	return $data;
 
@@ -35,7 +25,7 @@ function emp_details()
 function add_emp($name,$uname,$password, $cont)
 {
 	$conn = getConnection();
-	$query = "INSERT INTO users where values ('','{$name}','{$uname}','{$password}','{$cont}',2)";
+	$query = "INSERT INTO users values ('','{$name}','{$uname}','{$password}','{$cont}',2)";
 	$result = mysqli_query($conn,$query);
 
 	if ($result) {

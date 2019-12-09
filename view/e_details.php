@@ -29,7 +29,7 @@ require_once '../db/functions.php';
 					<td>".$row['name']."</td>
 					<td>".$row['uname']."</td>
 					<td>".$row['contactNo']."</td>
-					<td>".$row['password']."</td>
+					<td>".$row['pass']."</td>
 					<td><a href='#'>Edit</a> &nbsp <a href='#'>Del</a></td>
 				</tr>
 
